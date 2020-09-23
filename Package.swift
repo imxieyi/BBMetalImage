@@ -7,7 +7,7 @@ let package = Package(
     name: "BBMetalImage",
     platforms: [.iOS(.v10)],
     products: [
-        .library(name: "BBMetalImage", targets: ["BBMetalImage"]),
+        .library(name: "BBMetalImage", type: .dynamic, targets: ["BBMetalImage"]),
     ],
     targets: [
         .target(
