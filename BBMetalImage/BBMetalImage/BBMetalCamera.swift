@@ -654,7 +654,8 @@ extension BBMetalCamera: AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     }
 }
 
-extension BBMetalCamera: AVCapturePhotoCaptureDelegate {    
+extension BBMetalCamera: AVCapturePhotoCaptureDelegate {
+    #if !targetEnvironment(macCatalyst)
     public func photoOutput(_ output: AVCapturePhotoOutput,
                             didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?,
                             previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?,
@@ -677,6 +678,7 @@ extension BBMetalCamera: AVCapturePhotoCaptureDelegate {
             delegate.camera(self, didFail: NSError(domain: "BBMetalCamera.Photo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Can not get Metal texture"]))
         }
     }
+    #endif
     
     private func rotatedTexture(with inTexture: MTLTexture, angle: Float) -> MTLTexture? {
         let source = BBMetalStaticImageSource(texture: inTexture)
